@@ -62,7 +62,7 @@ elif [ "$MODE" = "swarm" ]; then
 
   if [ "$STATE" = "present" ]; then
     echo Deploying stack $NAME...
-    docker stack deploy --prune $([[ -n "$FILE" ]] && printf "%s" "-c $FILE" ||:) --resolve-image $SWARM_PULL $([[ -n "$DOCKER_LOGIN_REGISTRY" ]] && printf "%s" "--with-registry-auth") $NAME
+    docker stack deploy --detach=false --prune $([[ -n "$FILE" ]] && printf "%s" "-c $FILE" ||:) --resolve-image $SWARM_PULL $([[ -n "$DOCKER_LOGIN_REGISTRY" ]] && printf "%s" "--with-registry-auth") $NAME
   elif [ "$STATE" = "absent" ]; then
     echo Removing stack $NAME...
     docker stack rm $NAME
